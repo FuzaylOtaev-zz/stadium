@@ -1,7 +1,9 @@
+import os
+
 from flask import Flask
 from flask_migrate import Migrate
 
-from app.config import DevelopmentConfig
+from app.config import DevelopmentConfig, app_config
 from app.models import db
 from app.controllers import stadium_groups_controller
 from app.controllers import stadiums_controller
@@ -13,9 +15,9 @@ from app.models.user import User
 from app.models.stadium_image import StadiumImage
 
 
-def create_app():
+def create_app(config_name):
     app = Flask(__name__, instance_relative_config=True)
-    app.config.from_object(DevelopmentConfig)
+    app.config.from_object(app_config[config_name])
 
     app.register_blueprint(stadium_groups_controller.bp)
     app.register_blueprint(stadium_controller.bp)

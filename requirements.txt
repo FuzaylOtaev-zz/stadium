@@ -3,5 +3,5 @@ Flask-SQLAlchemy==2.4.4
 Flask-Migrate==2.7.0
 psycopg2-binary==2.8.6
 GeoAlchemy2==0.8.4
-dacite==1.6.0
+pytest==6.2.2
 

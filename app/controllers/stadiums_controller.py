@@ -1,6 +1,8 @@
 from dataclasses import asdict
 
 from flask import Blueprint, request, jsonify
+
+from app.decorators.response import response
 from app.services.get_stadiums_by_points import get_stadiums_by_points
 from app.dataclasses.point_dc import PointDC
 
@@ -8,11 +10,12 @@ bp = Blueprint("stadiums", __name__, url_prefix="/stadiums")
 
 
 @bp.route("/points", methods=["GET"])
+@response
 def retrieve_stadiums_by_points():
     points = _query_params_to_points()
     stadiums = get_stadiums_by_points(points)
 
-    return jsonify([asdict(s) for s in stadiums])
+    return dict(stadiums=[asdict(s) for s in stadiums])
 
 
 def _query_params_to_points():
